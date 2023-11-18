@@ -3,15 +3,18 @@ import {NextResponse} from "next/server";
 export function middleware(req, res){
     if(req.nextUrl.pathname.startsWith("/api/profile")){
 
-        const reqHeader= new Headers(req.headers)
+        const reqHeader= new  Headers(req.headers)
 
-        const token= reqHeader.get("token");
 
-        if (token==="abc123"){
-            return NextResponse.next();
+        const apiKey= reqHeader.get("apiKey");
+        if (apiKey==="abc123"){
+            reqHeader.set("user_id","asraful1988")
+            return NextResponse.next(
+                {request:{headers:reqHeader}}
+            );
         }
         else {
-            return NextResponse.json({"message":"token not match"}, {"status" :"401"})
+            return NextResponse.json({"message":"apiKey not match"}, {"status" :"401"})
 
         }
 

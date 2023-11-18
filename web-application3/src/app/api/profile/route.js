@@ -1,13 +1,16 @@
 import {NextResponse} from "next/server";
-import {redirect} from "next/navigation";
+import {headers} from "next/headers";
 
 
 export async function GET(req,res){
 
     // redirect("http://asrafulalam.com")
 
+    let headerList= headers();
+    let  userID= headerList.get('user_id')
+
     return NextResponse.json(
-        [
+        [{userID:userID},
             {
                 "fName": "ASRAFUL",
                 "lName": "ALAM",
@@ -36,7 +39,6 @@ export async function GET(req,res){
             headers: {
                 "createBy":"asrafulAlam",
                 "Set-Cookie":"Auth=123ABC; path=/;author:azad;"
-
         }
         }
     )
