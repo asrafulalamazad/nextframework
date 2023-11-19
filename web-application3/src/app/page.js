@@ -6,6 +6,7 @@ const Page = () => {
         <div>
             <h1> Home Page</h1>
             <p> {process.env.API_KEY}</p>
+            <p> {process.env.API_PASSWORD}</p>
         </div>
     );
 };
