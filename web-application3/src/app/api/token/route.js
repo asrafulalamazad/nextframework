@@ -24,13 +24,9 @@ export async function GET(req, res){
 export async function POST(req,res){
 
     const JsonBody=await req.json();
-
     const token =   JsonBody['token'];
-
     const Key = new TextEncoder().encode(process.env.JWT_KEY);
-
     const decodeData = await  jwtVerify(token,Key)
-
     return NextResponse.json(decodeData);
 
 

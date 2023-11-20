@@ -47,8 +47,7 @@ export async function GET(req,res){
 export async function POST(req, res){
     const reqBody= req.body;
 
-
     return NextResponse.json({
-        data: reqBody.A
+        data: reqBody.json()
     })
 }
