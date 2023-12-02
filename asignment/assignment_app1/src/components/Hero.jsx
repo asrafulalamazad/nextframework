@@ -31,6 +31,8 @@ const Hero = () => {
                 <img src="images/Slack.png" alt="img"  />
             </div>
 
+            <div className="bg-green-200 h-[50px]"></div>
+
         </div>
     );
 };
