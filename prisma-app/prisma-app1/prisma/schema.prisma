@@ -99,15 +99,49 @@ model blob {
 }
 
 model users1 {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String
+  id Int @id @default(autoincrement())
+
+  email    String @unique
+  password String
+
+  profile1 profile1?
+  post     post[]
+  comment  comment[]
 }
 
 model profile1 {
-  id       Int    @id @default(autoincrement())
-  name     String
-  city     String
-  phone    String @unique
-  postcode String
+  id Int @id @default(autoincrement())
+
+  fName  String
+  lName  String
+  mobile String
+  city   String
+
+  userId Int @unique
+
+  user1 users1 @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+}
+
+model post {
+  id Int @id @default(autoincrement())
+
+  title       String
+  description String @db.LongText
+
+  userId  Int
+  user1   users1    @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  comment comment[]
+}
+
+model comment {
+  id Int @id @default(autoincrement())
+
+  text String
+
+  userId Int    @unique
+  users1 users1 @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  postId Int
+
+  post post @relation(fields: [postId], references: [id], onUpdate: Cascade, onDelete: Restrict)
 }
